@@ -1,16 +1,22 @@
 package blatt1.aufg2;
 
+import java.awt.BorderLayout;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 
 import blatt1.ServerEndpoint;
 
 
 
 public class ThreadedPoolPrimeServer {
-
+	ExecutorService executor = Executors.newFixedThreadPool(10);
 	private final ServerEndpoint endpoint;
 
+	
     ThreadedPoolPrimeServer() {
 	endpoint = new ServerEndpoint();
     }
@@ -23,7 +29,8 @@ public class ThreadedPoolPrimeServer {
 	}
 	return true;
     }
-    ExecutorService executor = Executors.newFixedThreadPool(10);
+    
+    
     while (true) {
 	    executor.execute(new Runnable() {
 		    public void run() {
@@ -39,6 +46,10 @@ public class ThreadedPoolPrimeServer {
     
     public static void main(String[] args) {
 	new ThreadedPoolPrimeServer().run();
+    JOptionPane.showMessageDialog(null,
+            "Sie müssen eine Ganzzahl eingeben",
+            "Eine Nachricht",                                       
+            JOptionPane.WARNING_MESSAGE);
     }
 
 }
