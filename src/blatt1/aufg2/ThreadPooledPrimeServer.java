@@ -33,6 +33,10 @@ public class ThreadPooledPrimeServer {
 	public ThreadPooledPrimeServer(int number) {
 		executor = Executors.newFixedThreadPool(number);
 		endpoint = new ServerEndpoint();
+		Thread t1 = new Thread(new MessageDiaolgThreadPooledServer(this));
+		Thread t2 = new Thread(new PoisonPill());
+		t1.start();
+		t2.start();
 	}
 
 	public void setStopServer() {
@@ -44,8 +48,7 @@ public class ThreadPooledPrimeServer {
 		System.out.println(Thread.currentThread() + "von Thread Pool Server");
 		System.out.println("ThreadPooledPrimeServer up and running...");
 
-		executor.execute(new MessageDiaolgThreadPooledServer(this));
-		executor.execute(new PoisonPill());
+
 		// Message Dialog
 		while (stopServer == false) {
 			// Muss man im MainThread machen
@@ -59,7 +62,8 @@ public class ThreadPooledPrimeServer {
 			executor.execute(new Worker(request.getNumber(), request
 					.getSender()));
 		}
-		executor.shutdownNow();
+		executor.shutdown();
+		
 		System.out.println("Shutdown");
 	}
 
