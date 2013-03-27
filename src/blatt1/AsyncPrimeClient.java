@@ -40,10 +40,7 @@ public class AsyncPrimeClient {
     }
     
     public static void main(String[] args) {
-        int eingabe = JOptionPane.showConfirmDialog(null,
-                "Geben Sie Ihr Einverständnis?",
-                "Einverständnis",
-                JOptionPane.YES_NO_CANCEL_OPTION);
+
         
     	for ( long i = 1000000000000000000L; i < 1000000000000000010L; i++ ) {
 	    try {
