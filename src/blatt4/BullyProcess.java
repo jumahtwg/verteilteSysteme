@@ -1,16 +1,27 @@
 package blatt4;
 
+import java.util.UUID;
+
+import blatt4.Message.MessageType;
+
 public class BullyProcess extends Process {
+
 
 
 	public BullyProcess(int id) {
 		super(id);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		 System.out.println("Thread: " + super.getID() + " starts");
+		 Message msg = new Message(MessageType.ELECT, getID(), UUID.randomUUID());
+		 if (getID() < destinations.size()) {
+			 if( destinations.keySet() != null)
+			 System.out.println("Number " + getID());
+			 msgQueue.add(msg);
+		 }
+
 		
 	}
 
